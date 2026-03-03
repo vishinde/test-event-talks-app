@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Talks 2026</title>
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --background-color: #f8f9fa;
+            --surface-color: #ffffff;
+            --text-color: #212529;
+            --border-color: #dee2e6;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+        header h1 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+        }
+        .search-container {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+        }
+        #search-input {
+            width: 80%;
+            max-width: 500px;
+            padding: 12px 15px;
+            font-size: 1rem;
+            border-radius: 50px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 5px var(--shadow-color);
+            transition: all 0.3s ease;
+        }
+        #search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+        }
+        #schedule-container {
+            display: grid;
+            gap: 25px;
+        }
+        .schedule-item {
+            display: flex;
+            background-color: var(--surface-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .schedule-item.talk-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--shadow-color);
+        }
+        .time-panel {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            flex-shrink: 0;
+            width: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .time-panel span {
+            font-size: 1.1rem;
+        }
+        .details-panel {
+            padding: 25px;
+            flex-grow: 1;
+        }
+        .details-panel h2 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+        .speakers {
+            font-style: italic;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+        .description {
+            margin-bottom: 15px;
+        }
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .category-tag {
+            background-color: #e9ecef;
+            color: var(--secondary-color);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .break-item .details-panel h2 {
+            color: var(--secondary-color);
+        }
+        .break-item .time-panel {
+            background-color: var(--secondary-color);
+        }
+        @media (max-width: 600px) {
+            .schedule-item {
+                flex-direction: column;
+            }
+            .time-panel {
+                width: 100%;
+                border-bottom: 1px solid var(--border-color);
+                flex-direction: row;
+                justify-content: center;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Tech Talks 2026</h1>
+            <p>A full day of insightful technical sessions.</p>
+        </header>
+
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search by category (e.g., AI, Web)...">
+        </div>
+
+        <main id="schedule-container">
+            <!-- Schedule will be dynamically inserted here by JavaScript -->
+        </main>
+    </div>
+
+    <script>
+        const scheduleData = [
+            {
+                type: 'talk',
+                startTime: '10:00 AM',
+                endTime: '11:00 AM',
+                title: 'The Future of AI: Beyond Language Models',
+                speakers: ['Dr. Evelyn Reed'],
+                categories: ['AI', 'Future Tech', 'Machine Learning'],
+                description: 'A deep dive into the upcoming advancements in artificial intelligence, exploring neural network architectures and their potential impact on society.'
+            },
+            {
+                type: 'break',
+                startTime: '11:00 AM',
+                endTime: '11:10 AM',
+                title: 'Coffee Break'
+            },
+            {
+                type: 'talk',
+                startTime: '11:10 AM',
+                endTime: '12:10 PM',
+                title: 'Building Scalable Web APIs with GraphQL',
+                speakers: ['David Chen', 'Maria Garcia'],
+                categories: ['Web', 'API', 'GraphQL'],
+                description: 'Learn the best practices for designing, implementing, and scaling robust APIs using GraphQL to create flexible and efficient client-server communication.'
+            },
+            {
+                type: 'talk',
+                startTime: '12:20 PM',
+                endTime: '01:20 PM',
+                title: 'Cybersecurity in a Post-Quantum World',
+                speakers: ['Alex Johnson'],
+                categories: ['Security', 'Cryptography', 'Future Tech'],
+                description: 'An exploration of the threats quantum computing poses to current cryptographic standards and the race to develop quantum-resistant encryption.'
+            },
+            {
+                type: 'break',
+                startTime: '01:20 PM',
+                endTime: '02:20 PM',
+                title: 'Lunch Break'
+            },
+            {
+                type: 'talk',
+                startTime: '02:20 PM',
+                endTime: '03:20 PM',
+                title: 'The Declarative UI Revolution with Jetpack Compose',
+                speakers: ['Ben Carter'],
+                categories: ['Android', 'Mobile', 'UI'],
+                description: 'Discover how modern declarative UI frameworks like Jetpack Compose are changing the way we build native mobile applications for Android.'
+            },
+            {
+                type: 'break',
+                startTime: '03:20 PM',
+                endTime: '03:30 PM',
+                title: 'Transition'
+            },
+            {
+                type: 'talk',
+                startTime: '03:30 PM',
+                endTime: '04:30 PM',
+                title: 'Cloud-Native DevOps: CI/CD at Scale',
+                speakers: ['Samira Khan', 'Leo Rodriguez'],
+                categories: ['DevOps', 'Cloud', 'CI/CD'],
+                description: 'A practical guide to implementing and managing continuous integration and deployment pipelines for cloud-native applications using Kubernetes and serverless tech.'
+            },
+            {
+                type: 'break',
+                startTime: '04:30 PM',
+                endTime: '04:40 PM',
+                title: 'Transition'
+            },
+            {
+                type: 'talk',
+                startTime: '04:40 PM',
+                endTime: '05:40 PM',
+                title: 'Ethical AI: Navigating Bias and Fairness',
+                speakers: ['Dr. Imani Adebayo'],
+                categories: ['AI', 'Ethics', 'Society'],
+                description: 'This session addresses the critical importance of ethics in AI, discussing methods for detecting and mitigating bias in machine learning models to ensure fair outcomes.'
+            }
+        ];
+
+        const scheduleContainer = document.getElementById('schedule-container');
+        const searchInput = document.getElementById('search-input');
+
+        function renderSchedule(items) {
+            scheduleContainer.innerHTML = '';
+            if (items.length === 0) {
+                scheduleContainer.innerHTML = '<p style="text-align:center; color: var(--secondary-color);">No talks match your search.</p>';
+                return;
+            }
+
+            items.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = `schedule-item ${item.type}-item`;
+
+                if (item.type === 'talk') {
+                    itemDiv.innerHTML = `
+                        <div class="time-panel">
+                            <span>${item.startTime}</span>
+                            <span>-</span>
+                            <span>${item.endTime}</span>
+                        </div>
+                        <div class="details-panel">
+                            <h2>${item.title}</h2>
+                            <div class="speakers">${item.speakers.join(', ')}</div>
+                            <div class="description">${item.description}</div>
+                            <div class="categories">
+                                ${item.categories.map(cat => `<span class="category-tag">${cat}</span>`).join('')}
+                            </div>
+                        </div>
+                    `;
+                } else { // break
+                    itemDiv.innerHTML = `
+                        <div class="time-panel">
+                            <span>${item.startTime}</span>
+                            <span>-</span>
+                            <span>${item.endTime}</span>
+                        </div>
+                        <div class="details-panel">
+                            <h2>${item.title}</h2>
+                        </div>
+                    `;
+                }
+                scheduleContainer.appendChild(itemDiv);
+            });
+        }
+        
+        function filterSchedule() {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            
+            if (!searchTerm) {
+                renderSchedule(scheduleData);
+                return;
+            }
+
+            const filteredTalks = scheduleData.filter(item => {
+                if (item.type !== 'talk') return false; // Don't filter out breaks, but don't match them either
+                return item.categories.some(cat => cat.toLowerCase().includes(searchTerm));
+            });
+            
+            // Reconstruct the schedule with breaks around the filtered talks
+            const finalSchedule = [];
+            const talkIndices = new Set(filteredTalks.map(talk => scheduleData.indexOf(talk)));
+            
+            for (let i = 0; i < scheduleData.length; i++) {
+                if (scheduleData[i].type === 'talk' && talkIndices.has(i)) {
+                    finalSchedule.push(scheduleData[i]);
+                } else if (scheduleData[i].type === 'break') {
+                    // Check if there is a visible talk before and after this break
+                    const prevIsVisibleTalk = i > 0 && talkIndices.has(i - 1);
+                    const nextIsVisibleTalk = i < scheduleData.length - 1 && talkIndices.has(i + 1);
+                    if(prevIsVisibleTalk || nextIsVisibleTalk) {
+                         finalSchedule.push(scheduleData[i]);
+                    }
+                }
+            }
+            
+            // Special handling for lunch break if it's stranded
+            const lunch = scheduleData.find(item => item.title === 'Lunch Break');
+            const lunchIndex = scheduleData.indexOf(lunch);
+            const talkBeforeLunch = scheduleData[lunchIndex-1];
+            const talkAfterLunch = scheduleData[lunchIndex+1];
+
+            if(filteredTalks.length > 0 && !finalSchedule.includes(lunch) && filteredTalks.includes(talkBeforeLunch) && filteredTalks.includes(talkAfterLunch)) {
+                 const insertIndex = finalSchedule.indexOf(talkBeforeLunch) + 1;
+                 finalSchedule.splice(insertIndex, 0, lunch);
+            }
+
+
+            renderSchedule(finalSchedule);
+        }
+
+        searchInput.addEventListener('input', filterSchedule);
+
+        // Initial render
+        renderSchedule(scheduleData);
+    </script>
+
+</body>
+</html>
